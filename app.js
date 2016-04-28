@@ -64,4 +64,27 @@ new Vue({
     }
   }
 }
+  // If we had a back end with an events endpoint set up that responds to GET requests
+this.$http.get('api/events').success(function(events) {
+  this.$set('events', events);
+}).error(function(error) {
+  console.log(error);
+});
+
+
+// If we had an endpoint set up that responds to POST requests
+this.$http.post('api/events', this.event).success(function(response) {
+  this.events.push(this.event);
+  console.log("Event added!");
+}).error(function(error) {
+  console.log(error);
+});
+
+// We could also delete an event if we had the events endpoint set up to delete data
+this.$http.delete('api/events/' + event.id).success(function(response) {
+  this.events.$remove(index);
+}).error(function(error) {
+  console.log(error);
+});
+
 });
